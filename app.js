@@ -78,7 +78,7 @@ var UIController = (function () {
 
         addListItem: function (obj, type) {
             var html, newHtml, element;
-            
+
             // create HTML String with placeholder
             if (type === 'inc') {
                 element = DOMstrings.incomeContainer;
@@ -86,7 +86,7 @@ var UIController = (function () {
             } else if (type === 'exp') {
                 element = DOMstrings.expensesContainer;
                 html = '<div class="item clearfix" id="expense-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
-            }      
+            }
 
             // Replace placeholder with data
             newHtml = html.replace('%id%', obj.id);
@@ -95,6 +95,20 @@ var UIController = (function () {
 
             // Insert HTML into DOM
             document.querySelector(element).insertAdjacentHTML('beforeend', newHtml);
+        },
+
+        clearFields: function () {
+            var fields, fieldsArr;
+
+            fields = document.querySelectorAll(DOMstrings.inputDescription + ', ' + DOMstrings.inputValue);
+            fieldsArr = Array.prototype.slice.call(fields);
+
+            fieldsArr.forEach(function (current, index, array) {
+                current.value = "";
+                current.description = "";
+            });
+
+            fieldsArr[0].focus();
         },
 
         getDOMstrings: function () {
@@ -126,9 +140,12 @@ var controller = (function (budgetCtrl, UICtrl) {
 
         // add item to budget controller
         newItem = budgetCtrl.addItem(input.type, input.description, input.value);
-        
+
         // add item to UI
         UICtrl.addListItem(newItem, input.type);
+
+        // clear fields
+        UICtrl.clearFields();
 
         // calculate total budget
 
