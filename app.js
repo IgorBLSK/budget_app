@@ -25,6 +25,8 @@ var budgetController = (function () {
 
     };
 
+    console.log("testing");
+
     return {
         addItem: function (type, des, val) {
             var newItem, ID;
