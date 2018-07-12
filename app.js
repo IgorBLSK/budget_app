@@ -132,6 +132,11 @@ var controller = (function (budgetCtrl, UICtrl) {
         });
     };
 
+    var updateBudget = function () {
+
+
+    };
+
     var ctrlAddItem = function () {
         var input, newItem;
 
